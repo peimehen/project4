@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Webpage Title -->
+    <title>Business Log Page</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit-icons.min.js"></script>
+
+<style>
+    .wrap {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    .index {
+        text-shadow: 2px 2px 2px grey;
+        font-weight: bold;
+        font-size: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 50px 0 100px 20px;
+    }
+
+    .search {
+        text-align: right;
+    }
+
+    .table {
+        margin-top: 30px;
+    }
+
+    .table .uk-table th {
+
+        text-align: center;
+    }
+
+    .table tbody tr td
+     {
+        vertical-align: middle;
+        text-align: center;
+       }
+
+    .btn_gr1 {
+        margin: 20px auto 50px auto;
+        float: left;
+    }
+    .icons {
+        float: right;
+        margin: 20px auto 50px auto;
+    }
+
+    .pagination {
+        margin-top: 50px;
+          display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    p {
+     margin: 0;
+     }
+
+</style>
+    <script>
+
+        $(document).ready(function(){
+         $('#save_box1').html('');
+         listing();
+      });
+
+   function listing() {
+      $.ajax({
+         type: "GET",
+         url: "/save_accounts",
+         data: {},
+         success: function(response){
+            let accounts = response['accounts'];
+            for (let i = 0; i < accounts.length; i++) {
+               make_accounts(accounts[i]['number'], accounts[i]['name1'], accounts[i]['phone'], accounts[i]['fax'], accounts[i]['email'], accounts[i]['note'])
+            }
+         }
+      })
+   }
+
+   function make_accounts(rank, name1, phone, fax, email, note) {
+       let html = '<tr>\
+      <td>' + rank + '</td>\
+      <td>' + name1 + '</td>\
+      <td>' + phone + '</td>\
+      <td>' + fax + '</td>\
+      <td>' + email + '</td>\
+      <td><a href="/detail?id=' + rank + '"><p>click</p></a></td>\
+      <td><button onclick="remove(\''+ rank +'\')"><p>delete</p></button></td>\
+      </tr>';
+      console.log(html);
+      $('#save_box1').append(html);
+   }
+
+     function remove(rank) {
+
+        $.ajax({
+          type: "POST",
+          url: "/remove_accounts",
+          data: {"id": rank},
+          success: function(response){
+            if(response['result'] == 'success'){
+               window.location.reload();
+            }
+         }
+      })
+      }
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1 class="index">
+            거래처 관리 목록
+        </h1>
+        <div class="search">
+            <input type="text">
+            <button id="but2" type="button" class="btn btn-outline-secondary">검색</button>
+        </div>
+        <div class="table">
+            <table class="uk-table uk-table-hover uk-table-divider">
+                <thead>
+                    <tr>
+                        <th scope="col">연번</th>
+                        <th>거래처명</th>
+                        <th>전화번호</th>
+                        <th>Fax번호</th>
+                        <th>E-mail</th>
+                        <th>내용보기</th>
+                        <th>내용삭제</th>
+                    </tr>
+                </thead>
+                <tbody id="save_box1">
+                    <tr>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="form-check-input" id="exampleCheck1"></td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="form-check-input" id="exampleCheck1"></td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                        <td>Table Data</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div class="btn_gr1">
+              <a href="/" class="btn btn-outline-info">Main Page</a>
+          </div>
+
+
+
+        <div class="icons">
+            <a href="/accounts1" class="uk-icon-link uk-margin-small-right" uk-icon="file-edit"></a>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

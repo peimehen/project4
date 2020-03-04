@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.min.js">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/ja.js"></script>
+
+<!-- Webpage Title -->
+<title>Business Log Page</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- JS -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/css/uikit.min.css" />
+<!--  -->
+<!-- UIkit JS -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit-icons.min.js"></script> -->
+
+<style>
+
+	.wrap {
+		width: 800px;
+		margin: 0 auto;
+	}
+
+	.index {
+		text-shadow: 2px 2px 2px grey;
+		font-weight: bold;
+		font-size: 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 50px 0 10px 20px;
+	}
+
+	.inputbox {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 80px auto 0 auto;
+		padding: 0;
+
+	}
+
+	.tablebox {
+		margin: 0 0 10px 0;
+	}
+
+	.btn_gr1 {
+		margin: 50px auto 50px auto;
+		float: left;
+	}
+
+	.btn_gr2 {
+
+		margin: 50px 0 0 260px;
+
+
+		display: inline-block;
+	}
+
+	.btn_gr3 {
+		margin: 50px auto 50px auto;
+		float: right;
+	}
+
+	.input-group {
+		border: 2px solid grey;
+	}
+
+	.input-group-text {
+		font-weight: bold;
+		font-size: 20px;
+		color: black;
+		background-color: #D5D5D5;
+	}
+
+	.text_box {
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+	}
+
+	th,td {
+		margin: 10px;
+		padding: 5px 30px 20px 10px;
+
+	}
+
+</style>
+<script>
+	function save_accounts() {
+
+		let name1 = $('#save-name1').val().trim();
+		let phone = $('#save-phone').val().trim();
+		let fax = $('#save-fax').val().trim();
+		let email= $('#save-email').val().trim();
+		let note= $('#save-note').val().trim();
+
+
+		if (name1 == ''){
+			alert('거래처명을 입력해주세요')
+			$('#save-name1').focus()
+			return
+		} else if (phone == ''){
+			alert('전화번호를 입력해주세요')
+			$('#save-phone').focus()
+			return
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "/save_accounts",
+			data: {
+				name1_give: name1,
+				phone_give: phone,
+				fax_give: fax,
+				email_give: email,
+				note_give: note,
+				},
+			success: function(response){
+				if(response['result'] == 'success'){
+					alert('작성 완료!');
+					window.location.href="/accounts2";
+				}
+			}
+		})
+	}
+
+
+
+
+
+</script>
+</head>
+
+
+<body>
+	<div class="wrap">
+		<h1 class="index">
+			거래처 입력 페이지
+		</h1>
+
+		<div class="inputbox">
+		<div class="form-group col-md-6">
+			<label for="inputEmail4">거래처명</label>
+			<input type="text" class="form-control" id="save-name1">
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputPassword4">전화번호</label>
+			<input type="text" class="form-control" id="save-phone">
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputEmail4">Fax번호</label>
+			<input type="text" class="form-control" id="save-fax">
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputPassword4">E-mail</label>
+			<input type="text" class="form-control" id="save-email">
+		</div>
+		<div class="form-group col-md-6">
+			<label for="inputEmail4">비고</label>
+			<input type="text" class="form-control" id="save-note">
+		</div>
+	</div>
+		<div class="btn_gr1">
+			<a href="/" class="btn btn-outline-info">Main Page</a>
+		</div>
+		<div class="btn_gr2">
+			<a href="#" onclick="save_accounts()" type="button" class="btn btn-outline-secondary">저장하기</a>
+		</div>
+		<div class="btn_gr3">
+			<a href="/accounts2" class="btn btn-outline-success">목록</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+
+   <link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+   <script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.min.js">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/ja.js"></script>
+
+<!-- Webpage Title -->
+<title>Business Log Page</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- JS -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/css/uikit.min.css" />
+<!--  -->
+<!-- UIkit JS -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/uikit@3.3.2/dist/js/uikit-icons.min.js"></script> -->
+
+<style>
+
+   .wrap {
+      width: 1200px;
+      margin: 0 auto;
+   }
+
+   .index {
+      text-shadow: 2px 2px 2px grey;
+      font-weight: bold;
+      font-size: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 50px 0 10px 20px;
+   }
+
+   .input_box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 30px auto 0 auto;
+      height: 200px;
+      padding: 0;
+
+   }
+
+   .tablebox {
+      margin: 0 0 10px 0;
+   }
+
+   .btn_gr1 {
+      margin: 50px auto 50px auto;
+      float: left;
+   }
+
+   .btn_gr2 {
+      margin: 50px 200px 0 500px;
+
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      display: inline-block;
+   }
+
+   .btn_gr3 {
+      margin: 50px auto 50px auto;
+      float: right;
+   }
+
+   .input-group {
+      border: 2px solid grey;
+   }
+
+   .input-group-text {
+      font-weight: bold;
+      font-size: 20px;
+      color: black;
+      background-color: #D5D5D5;
+   }
+
+   .text_box {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+   }
+
+   th,td {
+      margin: 10px;
+      padding: 5px 30px 20px 10px;
+
+   }
+
+</style>
+<script>
+   $(function () {
+      $('#save-date').bootstrapMaterialDatePicker({
+         format: 'YYYY-MM-DD HH:mm'
+      });
+   });
+
+   function save() {
+
+      let part_name = $('#save-partname').val().trim();
+      let name = $('#save-name').val().trim();
+      let date = $('#save-date').val().trim();
+      let task_details= $('#save-task').val().trim();
+      let task_contents1= $('#save-contents1').val();
+      let task_contents2= $('#save-contents2').val();
+      let task_contents3= $('#save-contents3').val();
+      let task_note1= $('#save-note1').val();
+      let task_note2= $('#save-note2').val();
+      let task_note3= $('#save-note3').val();
+
+
+
+      if (part_name == ''){
+         alert('부서명을 입력해주세요')
+         $('#save-partname').focus()
+         return
+      } else if (name == ''){
+         alert('작성자를 입력해주세요')
+         $('#save-name').focus()
+         return
+      } else if (date == ''){
+         alert('작성일자를 입력해주세요')
+         $('#save-date').focus()
+         return
+      } else if (task_details == ''){
+         alert('업무내용을 입력해주세요')
+         $('#save-task').focus()
+         return
+      } else if (task_contents1 == ''){
+         alert('내용을 입력해주세요')
+         $('#save-contents1').focus()
+         return
+      } else if (task_contents2 == ''){
+         alert('내용을 입력해주세요')
+         $('#save-contents2').focus()
+         return
+      } else if (task_contents3 == ''){
+         alert('내용을 입력해주세요')
+         $('#save-contents3').focus()
+         return
+      } else if (task_note1 == ''){
+         alert('내용을 입력해주세요')
+         $('#save-note1').focus()
+         return
+      }
+
+
+
+      $.ajax({
+         type: "POST",
+         url: "/save",
+         data: {
+            partname_give: part_name,
+            name_give: name,
+            date_give: date,
+            taskdetails_give: task_details,
+            taskcontents1_give: task_contents1,
+            taskcontents2_give: task_contents2,
+            taskcontents3_give: task_contents3,
+            task_note1_give: task_note1,
+            task_note2_give: task_note2,
+            task_note3_give: task_note3,
+         },
+         success: function(response){
+            if(response['result'] == 'success'){
+               alert('작성 완료!');
+               window.location.href="/taskbullet3";
+            }
+         }
+      })
+   }
+
+
+
+
+
+</script>
+</head>
+
+
+<body>
+   <div class="wrap">
+      <h1 class="index">
+         업무일지
+      </h1>
+
+      <div class="input_box col">
+         <table class="tablebox">
+            <tr>
+               <th>부서명</th>
+               <td>
+                  <select class="form-control" id="save-partname">
+                     <option>총무팀</option>
+                     <option>재무팀</option>
+                     <option>입찰팀</option>
+                     <option>미화팀</option>
+                     <option>경비사업부</option>
+                     <option>주택관리부</option>
+                  </select>
+               </td>
+
+               <th>작성자</th>
+               <td><input type="text" id="save-name" name="UserID" value="{{ name }}" /></td>
+               <th>작성일</th>
+               <td class="date_table">
+                  <input class="result" type="text" id="save-date" placeholder="{{ date }}" >
+               </td>
+            </tr>
+            <tr>
+               <th>주요업무 내용</th>
+               <td><input type="text" id="save-task" name="UserID" value="{{ task_details }}" /></td>
+            </tr>
+         </table>
+
+      </div>
+
+      <div class="text_box col">
+         <div class="input-group">
+            <div class="input-group-prepend">
+               <span class="input-group-text col">금일 예정 업무</span>
+            </div>
+            <textarea name="memo" id="save-contents1" rows=15 class="col">{{ task_contents1 }}</textarea>
+            <div class="input-group-prepend">
+               <span class="input-group-text col">참고 사항</span>
+            </div>
+            <textarea name="memo" rows=15 class="col" id="save-note1">{{ task_note1 }}</textarea>
+         </div>
+
+         <div class="input-group">
+            <div class="input-group-prepend">
+               <span class="input-group-text col">금일 업무 내용</span>
+            </div>
+            <textarea name="memo" id="save-contents2" rows=15 class="col">{{ task_contents2 }}</textarea>
+            <div class="input-group-prepend">
+               <span class="input-group-text col">참고 사항</span>
+            </div>
+            <textarea name="memo" rows=15 class="col" id="save-note2">{{ task_note2 }}</textarea>
+         </div>
+
+         <div class="input-group">
+            <div class="input-group-prepend">
+               <span class="input-group-text col">명일 예정 업무</span>
+            </div>
+            <textarea name="memo" rows=15 id="save-contents3" class="col">{{ task_contents3 }}</textarea>
+            <div class="input-group-prepend">
+               <span class="input-group-text col" >참고 사항</span>
+            </div>
+            <textarea name="memo" rows=15 class="col" id="save-note3">{{ task_note3 }}</textarea>
+         </div>
+
+      </div>
+      <div class="btn_gr1">
+         <a href="/" class="btn btn-outline-info">Main Page</a>
+      </div>
+      <div class="btn_gr2">
+         <a href="#" onclick="save()" type="button" class="btn btn-outline-secondary">저장하기</a>
+      </div>
+      <div class="btn_gr3">
+         <a href="/taskbullet3" class="btn btn-outline-success">목록</a>
+      </div>
+   </div>
+</body>
+</html>
+
